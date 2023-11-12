@@ -12,16 +12,6 @@ import postRouter from './../../Routes/postsRouts';
 //middleware
 api.use(express.json())
 
-console.log(process.env.MONGODB_URI);
-// api.use(async (req, res, next) => {
-//     const mongoConnect = await mongoose.connect(process.env.MONGODB_URI);
-
-//     next()
-// })
-
-
-
 api.use("/api/", postRouter);
-
 
 export const handler = serverless(api);

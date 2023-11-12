@@ -1,6 +1,4 @@
 const Posts = require('../models/PostModel')
-// const express = require('express');
-
 
 // Get all posts
 const getAllPosts = async (req, res) => {
@@ -14,8 +12,7 @@ const getAllPosts = async (req, res) => {
 
 // create post
 const createPost = async (req, res) => {
-    const { body, author = "Anonimus", userid = "Anonimus" } = req.body
-
+    const { body, author, userid } = req.body
     try {
         const post = await Posts.create({ body, author, userid })
         res.status(200).json(post)
