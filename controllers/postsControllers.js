@@ -4,6 +4,8 @@ const Posts = require('../models/PostModel')
 const getAllPosts = async (req, res) => {
     try {
         const post = await Posts.find({}).sort({ createdAt: -1 })
+        res.set('Access-Control-Allow-Origin', '*');
+        // res.send({ "msg": "This has CORS enabled 🎈" })
         res.status(200).json(post)
     } catch (error) {
         res.status(400).json({ error: error.message })
