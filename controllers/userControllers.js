@@ -13,16 +13,18 @@ const loginUser = async (req, res) => {
 //singup user
 const singupUser = async (req, res) => {
     const { name, email, phone, password } = req.body
-    // const nameExist = await User.exists({ name: name })
-    // if (!name) {
-    //     return res.status(400).json({ error: "name missed" })
-    // }
-    // if (nameExist) {
-    //     return res.status(400).json({ error: "name are used" })
-    // }
+
+    if (!name) {
+        res.status(400).json({ error: "name required" })
+    }
+
+    if (!password) {
+        res.status(400).json({ error: "password required" })
+    }
+
     try {
-        const user = await User.singup({ name, email, phone, password})
-        res.status(200).json(email, user)
+        const user = await User.signup({ name, email, phone, password })
+        res.status(200).json({ user })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -83,7 +85,6 @@ const updateUser = async (req, res) => {
 
 module.exports = {
     getAllUsers,
-    createUser,
     deleteUser,
     updateUser,
     getOneUser,

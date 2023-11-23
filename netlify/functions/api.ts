@@ -14,6 +14,6 @@ import userRouter from './../../Routes/userRouts';
 api.use(express.json())
 
 api.use("/api/", postRouter);
-api.use("/api/user", postRouter);
+api.use("/api/user", userRouter);
 
 export const handler = serverless(api);
