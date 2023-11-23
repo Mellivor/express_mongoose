@@ -8,13 +8,6 @@ const { getAllPosts,
     updatePost,
     createComment } = require('../controllers/postsControllers');
 
-const { getAllUsers,
-    createUser,
-    deleteUser,
-    updateUser,
-    getOneUser } = require('../controllers/userControllers');
-
-
 router.get("/posts", getAllPosts);
 
 router.post("/posts", createPost);
@@ -27,10 +20,5 @@ router.patch("/posts/", updatePost);
 
 router.post("/comment/", createComment);
 
-router.post("/user", createUser);
-
-router.get("/user/:id", getOneUser);
-
-router.post("/user", updateUser);
 
 module.exports = router;

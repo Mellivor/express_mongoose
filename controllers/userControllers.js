@@ -1,5 +1,33 @@
 const User = require('../models/UserModel')
 
+//login user
+const loginUser = async (req, res) => {
+    try {
+        const users = await User.find({}).sort({ createdAt: -1 })
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+//singup user
+const singupUser = async (req, res) => {
+    const { name, email, phone, password } = req.body
+    // const nameExist = await User.exists({ name: name })
+    // if (!name) {
+    //     return res.status(400).json({ error: "name missed" })
+    // }
+    // if (nameExist) {
+    //     return res.status(400).json({ error: "name are used" })
+    // }
+    try {
+        const user = await User.singup({ name, email, phone, password})
+        res.status(200).json(email, user)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
 // Get all users
 const getAllUsers = async (req, res) => {
     try {
@@ -19,25 +47,6 @@ const getOneUser = async (req, res) => {
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
-}
-
-// create user
-const createUser = async (req, res) => {
-    const { name, email, phone } = req.body
-    const nameExist = await User.exists({ name: name })
-    if (!name) {
-        return res.status(400).json({ error: "name missed" })
-    }
-    if (nameExist) {
-        return res.status(400).json({ error: "name are used" })
-    }
-    try {
-        const user = await User.create({ name: name, email: email, phone: phone })
-        res.status(200).json(user)
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-
 }
 
 
@@ -78,4 +87,6 @@ module.exports = {
     deleteUser,
     updateUser,
     getOneUser,
+    loginUser,
+    singupUser,
 }
