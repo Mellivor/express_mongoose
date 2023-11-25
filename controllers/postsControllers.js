@@ -28,9 +28,9 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     // const { postid, userid } = req.query
     const { postid, userid } = req.body
-    if (userid === "Anonymous") {
-        return res.status(200).json("Anonymous posts can't be delated")
-    }
+    // if (userid === "Anonymous") {
+    //     return res.status(200).json("Anonymous posts can't be delated")
+    // }
 
     try {
         const post = await Posts.findOne({ _id: postid }).deleteOne({ userid: userid })
