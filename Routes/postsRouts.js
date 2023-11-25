@@ -12,7 +12,7 @@ router.get("/posts", getAllPosts);
 
 router.post("/posts", createPost);
 
-router.delete("/posts/", deletePost);
+router.delete("/posts", deletePost);
 
 router.delete("/comment/", deleteComent);
 

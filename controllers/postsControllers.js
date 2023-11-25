@@ -29,11 +29,13 @@ const deletePost = async (req, res) => {
     // const { postid, userid } = req.query
     const { postid, userid } = req.body
     if (userid === "Anonymous") {
-        return res.status(200).json("Anonymous posts kant be delated")
+        return res.status(200).json("Anonymous posts can't be delated")
     }
 
     try {
         const post = await Posts.findOne({ _id: postid }).deleteOne({ userid: userid })
+        // const post = await Posts.findOne({ _id: postid }).deleteOne()
+        // const post = await Posts.deleteOne({ _id: postid })
         res.status(200).json(post)
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -50,7 +52,7 @@ const deleteComent = async (req, res) => {
 
 // update post
 const updatePost = async (req, res) => {
-    const { postid, newComment, author = "Anonymous", userid = "Anonimus" } = req.query
+    const { postid, newComment, author = "Anonymous", userid = "Anonymous" } = req.query
     try {
         const post = await Posts.findOne({ _id: postid })
         post.comments.push({ body: newComment, author: author, userid: userid })
@@ -63,7 +65,7 @@ const updatePost = async (req, res) => {
 
 // create copmment
 const createComment = async (req, res) => {
-    const { postid, newComment, author = "Anonimus", userid = "Anonimus" } = req.query
+    const { postid, newComment, author = "Anonymous", userid = "Anonymous" } = req.query
     try {
         const post = await Posts.findOne({ _id: postid })
         post.comments.push({ body: newComment, author: author, userid: userid })

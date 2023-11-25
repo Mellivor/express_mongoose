@@ -57,7 +57,7 @@ const deleteUser = async (req, res) => {
     // const { postid, userid } = req.query
     const { postid, userid } = req.body
     if (userid === "Anonymous") {
-        return res.status(200).json("Anonymous posts kant be delated")
+        return res.status(200).json("Anonymous posts kant be deleted")
     }
 
     try {

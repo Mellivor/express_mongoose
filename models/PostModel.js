@@ -8,12 +8,11 @@ const commentSchema = new Schema({
     },
     author: {
         type: String,
-        // default: "Anonimus",
+        // default: "Anonymous",
     },
     userid: {
         // type: mongoose.SchemaTupes.ObjectID,
         type: String,
-        default: "Anonimus",
     },
     likes: {
         type: Number,
@@ -37,11 +36,13 @@ const postsSchema = new Schema({
     },
     author: {
         type: String,
-        default: "Anonimus"
+        default: "Anonymous"
     },
     userid: {
         // type: mongoose.SchemaTupes.ObjectID,
         // rel: "User",
+        type: String,
+        default: "Anonymous"
     },
     likes: {
         type: Number,
