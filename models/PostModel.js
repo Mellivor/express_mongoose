@@ -20,7 +20,14 @@ const commentSchema = new Schema({
     },
     liked: {
         type: Array,
+    },
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: true,
+        required: true,
+        auto: true,
     }
+
 }, { timestamps: true })
 
 const postsSchema = new Schema({
@@ -42,7 +49,8 @@ const postsSchema = new Schema({
     liked: {
         type: Array,
     },
-    // comments: [commentSchema]
+    comments: [commentSchema],
+
 }, { timestamps: true })
 
 module.exports = mongoose.model('Posts', postsSchema)
