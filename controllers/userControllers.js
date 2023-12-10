@@ -7,14 +7,18 @@ const createToken = (_id) => {
 
 //login user
 const loginUser = async (req, res) => {
-    const { name, password } = req.bpdy
+    const { name, password } = req.body
 
     try {
         const user = await User.login(name, password)
 
         const token = createToken(user._id)
 
-        res.status(200).json({ token })
+        res.status(200).json({
+            token: token,
+            _id: user._id,
+            name: user.name
+        })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -37,7 +41,11 @@ const singupUser = async (req, res) => {
 
         const token = createToken(user._id)
 
-        res.status(200).json({ token })
+        res.status(200).json({
+            token: token,
+            _id: user._id,
+            name: user.name
+        })
 
     } catch (error) {
         res.status(400).json({ error: error.message })
