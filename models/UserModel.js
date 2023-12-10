@@ -54,11 +54,13 @@ userSchema.statics.login = async function (name, password) {
         throw Error('Заповніть поля відмічені *')
     }
 
-    const user = await this.exists({ name })
+    const isUser = await this.exists({ name })
 
-    if (!user) {
+    if (!isUser) {
         throw Error("Не вірне і'мя або пароль")
     }
+
+    const user = await this.findOne({ name: name })
 
     const match = await bcrypt.compare(password, user.password)
 
