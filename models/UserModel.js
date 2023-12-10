@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
+
 const userSchema = new Schema({
     name: {
         type: String,
@@ -26,14 +27,18 @@ const userSchema = new Schema({
 userSchema.statics.signup = async function ({ name, phone, email, password }) {
 
     const nameExist = await this.exists({ name })
-    const emailExist = await this.exists({ email })
+    // const emailExist = await this.exists({ email })
 
     if (nameExist) {
         throw Error("name are used")
     }
 
-    if (emailExist) {
-        throw Error('Email is already in use')
+    // if (emailExist) {
+    //     throw Error('Email is already in use')
+    // }
+
+    if (!name || !password) {
+        throw Error('Заповніть поля відмічені *')
     }
 
     const salt = await bcrypt.genSalt(10)
@@ -41,6 +46,28 @@ userSchema.statics.signup = async function ({ name, phone, email, password }) {
     const user = await this.create({ name, phone, email, password: hash })
 
     return user
+}
+
+// static login method
+userSchema.static.login = async function (name, password) {
+    if (!name || !password) {
+        throw Error('Заповніть поля відмічені *')
+    }
+
+    const user = await this.exists({ name })
+
+    if (!user) {
+        throw Error("Не вірне і'мя або пароль")
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+        throw Error("Не вірне і'мя або пароль")
+    }
+
+    return user
+
 }
 
 module.exports = mongoose.model('Users', userSchema)

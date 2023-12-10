@@ -15,4 +15,6 @@ router.get("/user/:id", getOneUser);
 
 router.post("/user", updateUser);
 
+router.post("/login", loginUser);
+
 module.exports = router;
