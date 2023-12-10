@@ -49,7 +49,7 @@ userSchema.statics.signup = async function ({ name, phone, email, password }) {
 }
 
 // static login method
-userSchema.static.login = async function (name, password) {
+userSchema.statics.login = async function (name, password) {
     if (!name || !password) {
         throw Error('Заповніть поля відмічені *')
     }
