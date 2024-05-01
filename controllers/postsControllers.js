@@ -23,6 +23,21 @@ const createPost = async (req, res) => {
 
 }
 
+// create Telegram post
+const createTelegramPost = async (req, res) => {
+    const body = JSON.stringify(req.body);
+
+    const author = "Дмитро";
+    const userid = "6575fc028cebe2359499e33d";
+    try {
+        const post = await Posts.create({ body: body, author: author, userid: userid })
+        // res.status(200).json(post)
+        res.status(200).json(post)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+}
 
 // dellete post
 const deletePost = async (req, res) => {
@@ -83,5 +98,6 @@ module.exports = {
     deletePost,
     deleteComent,
     updatePost,
-    createComment
+    createComment,
+    createTelegramPost,
 }

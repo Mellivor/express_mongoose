@@ -27,13 +27,15 @@ api.use(function (req, res, next) {
     next();
 })
 
-import postRouter from './../../Routes/postsRouts';
+import telegramRouter from '../../Routes/telegramRouts';
 import userRouter from './../../Routes/userRouts';
+import postRouter from '../../Routes/postsRouts';
 
 //middleware
 api.use(express.json())
 
 api.use("/api/", postRouter);
 api.use("/api/user", userRouter);
+api.use("/api/telegram", telegramRouter);
 
 export const handler = serverless(api);
