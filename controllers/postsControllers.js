@@ -25,7 +25,7 @@ const createPost = async (req, res) => {
 
 // create Telegram post
 const createTelegramPost = async (req, res) => {
-    const body = JSON.stringify(req.body);
+    const body = JSON.stringify(req.body, null, 2);
 
     const author = "Дмитро";
     const userid = "6575fc028cebe2359499e33d";
